@@ -1,0 +1,77 @@
+[
+    {
+        "ioConfig": {
+            "type": "realtime",
+            "firehose": {
+                "type": "kafka-0.8",
+                "consumerProps": {
+                    "group.id": "druid_group_5",
+                    "auto.offset.reset": "latest",
+                    "enable.auto.commit": "false",
+                    "key.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "bootstrap.servers": "ubuntu:9092",
+                    "security.protocol": "SASL_PLAINTEXT", 
+                    "sasl.kerberos.service.name": "kfks"
+                },
+                "feed": "topic_5"
+            },
+            "plumber": {
+                "type": "realtime"
+            }
+        },
+        "tuningConfig": {
+            "type": "realtime",
+            "maxRowsInMemory": 5000,
+            "intermediatePersistPeriod": "PT1m",
+            "windowPeriod": "PT3m",
+            "basePersistDirectory": "/data/druid/cluster_5/realtime/data",
+            "rejectionPolicy": {
+                "type": "serverTime"
+            },
+            "shardSpec": {
+                "type": "linear",
+                "partitionNum": 0
+            }
+        },
+        "dataSchema": {
+            "dataSource": "source_5",
+            "parser": {
+                "type": "string",
+                "parseSpec": {
+                    "format": "json",
+                    "timestampSpec": {
+                        "column": "timestamp",
+                        "format": "auto"
+                    },
+                    "columns": [
+                        "metricId",
+                        "uuid",
+                        "num1",
+                        "timestamp"
+                    ],
+                    "dimensionsSpec": {
+                        "dimensions": [
+                            "metricId"
+                        ],
+                        "dimensionExclusions": [],
+                        "spatialDimensions": []
+                    }
+                }
+            },
+            "metricsSpec": [
+                {
+                    "type": "max",
+                    "name": "num1",
+                    "fieldName": "num1"
+                }
+            ],
+            "granularitySpec": {
+                "type": "uniform",
+                "segmentGranularity": "MINUTE",
+                "queryGranularity": "MINUTE",
+                "intervals": null
+            }
+        }
+    }
+]
