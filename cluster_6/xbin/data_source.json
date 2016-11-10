@@ -1,0 +1,350 @@
+[
+    {
+        "ioConfig": {
+            "type": "realtime",
+            "firehose": {
+                "type": "kafka-0.8",
+                "consumerProps": {
+                    "group.id": "druid_metric_1minute",
+                    "auto.offset.reset": "earliest",
+                    "enable.auto.commit": "false",
+                    "key.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "bootstrap.servers": "10.128.6.72:9092",
+                    "security.protocol": "SASL_PLAINTEXT", 
+                    "sasl.kerberos.service.name": "kfk"
+                },
+                "feed": "tps-dc-metric-formatdata"
+            },
+            "plumber": {
+                "type": "realtime"
+            }
+        },
+        "tuningConfig": {
+            "type": "realtime",
+            "maxRowsInMemory": 5000,
+            "intermediatePersistPeriod": "PT30m",
+            "windowPeriod": "PT30m",
+            "basePersistDirectory": "/data/druid/cluster_6/realtime/data",
+            "rejectionPolicy": {
+                "type": "serverTime"
+            },
+            "shardSpec": {
+                "type": "linear",
+                "partitionNum": 0
+            }
+        },
+        "dataSchema": {
+            "dataSource": "druid_metric",
+            "parser": {
+                "type": "string",
+                "parseSpec": {
+                    "format": "tsv",
+                    "timestampSpec": {
+                        "column": "timestamp",
+                        "format": "auto"
+                    },
+                    "columns": [
+                        "salt",
+                        "data_version",
+                        "applicationId",
+                        "timeScope",
+                        "metricTypeId",
+                        "metricId",
+                        "time",
+                        "agentRunId",
+                        "uuid",
+                        "num1",
+                        "num2",
+                        "num3",
+                        "num4",
+                        "num5",
+                        "num6",
+                        "timestamp"
+                    ],
+                    "dimensionsSpec": {
+                        "dimensions": [
+                            "applicationId",
+                            "metricTypeId",
+                            "metricId",
+                            "agentRunId"
+                        ],
+                        "dimensionExclusions": [],
+                        "spatialDimensions": []
+                    }
+                }
+            },
+            "metricsSpec": [
+                {
+                    "type": "doubleSum",
+                    "name": "num1",
+                    "fieldName": "num1"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num2",
+                    "fieldName": "num2"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num3",
+                    "fieldName": "num3"
+                },
+                {
+                    "type": "min",
+                    "name": "num4",
+                    "fieldName": "num4"
+                },
+                {
+                    "type": "max",
+                    "name": "num5",
+                    "fieldName": "num5"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num6",
+                    "fieldName": "num6"
+                }
+            ],
+            "granularitySpec": {
+                "type": "uniform",
+                "segmentGranularity": "TEN_MINUTE",
+                "queryGranularity": "MINUTE",
+                "intervals": null
+            }
+        }
+    },
+    {
+        "ioConfig": {
+            "type": "realtime",
+            "firehose": {
+                "type": "kafka-0.8",
+                "consumerProps": {
+                    "group.id": "druid_metric_10minute",
+                    "auto.offset.reset": "earliest",
+                    "enable.auto.commit": "false",
+                    "key.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "bootstrap.servers": "10.128.6.72:9092",
+                    "security.protocol": "SASL_PLAINTEXT", 
+                    "sasl.kerberos.service.name": "kfk"
+                },
+                "feed": "tps-dc-metric-formatdata"
+            },
+            "plumber": {
+                "type": "realtime"
+            }
+        },
+        "tuningConfig": {
+            "type": "realtime",
+            "maxRowsInMemory": 5000,
+            "intermediatePersistPeriod": "PT30m",
+            "windowPeriod": "PT30m",
+            "basePersistDirectory": "/data/druid/cluster_6/realtime/data",
+            "rejectionPolicy": {
+                "type": "serverTime"
+            },
+            "shardSpec": {
+                "type": "linear",
+                "partitionNum": 0
+            }
+        },
+        "dataSchema": {
+            "dataSource": "druid_metric_10minute",
+            "parser": {
+                "type": "string",
+                "parseSpec": {
+                    "format": "tsv",
+                    "timestampSpec": {
+                        "column": "timestamp",
+                        "format": "auto"
+                    },
+                    "columns": [
+                        "salt",
+                        "data_version",
+                        "applicationId",
+                        "timeScope",
+                        "metricTypeId",
+                        "metricId",
+                        "time",
+                        "agentRunId",
+                        "uuid",
+                        "num1",
+                        "num2",
+                        "num3",
+                        "num4",
+                        "num5",
+                        "num6",
+                        "timestamp"
+                    ],
+                    "dimensionsSpec": {
+                        "dimensions": [
+                            "applicationId",
+                            "metricTypeId",
+                            "metricId",
+                            "agentRunId"
+                        ],
+                        "dimensionExclusions": [],
+                        "spatialDimensions": []
+                    }
+                }
+            },
+            "metricsSpec": [
+                {
+                    "type": "doubleSum",
+                    "name": "num1",
+                    "fieldName": "num1"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num2",
+                    "fieldName": "num2"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num3",
+                    "fieldName": "num3"
+                },
+                {
+                    "type": "min",
+                    "name": "num4",
+                    "fieldName": "num4"
+                },
+                {
+                    "type": "max",
+                    "name": "num5",
+                    "fieldName": "num5"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num6",
+                    "fieldName": "num6"
+                }
+            ],
+            "granularitySpec": {
+                "type": "uniform",
+                "segmentGranularity": "HOUR",
+                "queryGranularity": {
+                    "type": "duration",
+                    "duration": 600000
+                },
+                "intervals": null
+            }
+        }
+    },
+	{
+        "ioConfig": {
+            "type": "realtime",
+            "firehose": {
+                "type": "kafka-0.8",
+                "consumerProps": {
+                    "group.id": "druid_metric_1hour",
+                    "auto.offset.reset": "earliest",
+                    "enable.auto.commit": "false",
+                    "key.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+                    "bootstrap.servers": "10.128.6.72:9092",
+                    "security.protocol": "SASL_PLAINTEXT", 
+                    "sasl.kerberos.service.name": "kfk"
+                },
+                "feed": "tps-dc-metric-formatdata"
+            },
+            "plumber": {
+                "type": "realtime"
+            }
+        },
+        "tuningConfig": {
+            "type": "realtime",
+            "maxRowsInMemory": 5000,
+            "intermediatePersistPeriod": "PT30m",
+            "windowPeriod": "PT30m",
+            "basePersistDirectory": "/data/druid/cluster_6/realtime/data",
+            "rejectionPolicy": {
+                "type": "serverTime"
+            },
+            "shardSpec": {
+                "type": "linear",
+                "partitionNum": 0
+            }
+        },
+        "dataSchema": {
+            "dataSource": "druid_metric_1hour",
+            "parser": {
+                "type": "string",
+                "parseSpec": {
+                    "format": "tsv",
+                    "timestampSpec": {
+                        "column": "timestamp",
+                        "format": "auto"
+                    },
+                    "columns": [
+                        "salt",
+                        "data_version",
+                        "applicationId",
+                        "timeScope",
+                        "metricTypeId",
+                        "metricId",
+                        "time",
+                        "agentRunId",
+                        "uuid",
+                        "num1",
+                        "num2",
+                        "num3",
+                        "num4",
+                        "num5",
+                        "num6",
+                        "timestamp"
+                    ],
+                    "dimensionsSpec": {
+                        "dimensions": [
+                            "applicationId",
+                            "metricTypeId",
+                            "metricId",
+                            "agentRunId"
+                        ],
+                        "dimensionExclusions": [],
+                        "spatialDimensions": []
+                    }
+                }
+            },
+            "metricsSpec": [
+                {
+                    "type": "doubleSum",
+                    "name": "num1",
+                    "fieldName": "num1"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num2",
+                    "fieldName": "num2"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num3",
+                    "fieldName": "num3"
+                },
+                {
+                    "type": "min",
+                    "name": "num4",
+                    "fieldName": "num4"
+                },
+                {
+                    "type": "max",
+                    "name": "num5",
+                    "fieldName": "num5"
+                },
+                {
+                    "type": "doubleSum",
+                    "name": "num6",
+                    "fieldName": "num6"
+                }
+            ],
+            "granularitySpec": {
+                "type": "uniform",
+                "segmentGranularity": "SIX_HOUR",
+                "queryGranularity": "HOUR",
+                "intervals": null
+            }
+        }
+    }
+]
